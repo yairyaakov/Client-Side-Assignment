@@ -5,9 +5,21 @@ import ColumnVisibilityPanel from './components/ColumnVisibilityPanel/ColumnVisi
 import { tableMockData } from './utils/mockData'
 
 function App() {
+  const [tableRows, setTableRows] = useState(tableMockData.data)
+
   const [visibleColumnIds, setVisibleColumnIds] = useState(
     () => tableMockData.columns.map(column => column.id)
   )
+
+  function handleCellChange(rowId, columnId, newValue) {
+    setTableRows(prevRows =>
+      prevRows.map(row =>
+        row.id === rowId
+          ? { ...row, [columnId]: newValue }
+          : row
+      )
+    )
+  }
 
   function handleToggleColumn(columnId) {
     setVisibleColumnIds(prev =>
@@ -32,8 +44,9 @@ function App() {
         />
         <DataTable
           columns={tableMockData.columns}
-          data={tableMockData.data}
+          data={tableRows}
           visibleColumnIds={visibleColumnIds}
+          onCellChange={handleCellChange}
         />
       </main>
     </div>

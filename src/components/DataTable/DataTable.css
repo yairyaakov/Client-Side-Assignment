@@ -48,6 +48,49 @@
   background-color: #f8f9fa;
 }
 
+/* ── Editable inputs ── */
+
+.data-table td input[type='text'],
+.data-table td input[type='number'],
+.data-table td select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.2rem 0.35rem;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: #212529;
+  background-color: transparent;
+  outline: none;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.data-table td input[type='text']:hover,
+.data-table td input[type='number']:hover,
+.data-table td select:hover {
+  border-color: #ced4da;
+}
+
+.data-table td input[type='text']:focus,
+.data-table td input[type='number']:focus,
+.data-table td select:focus {
+  border-color: #1a1a2e;
+  background-color: #fff;
+}
+
+.data-table td select {
+  cursor: pointer;
+}
+
+.data-table td input[type='checkbox'] {
+  display: block;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #1a1a2e;
+}
+
 /* ── Empty state ── */
 
 .table-empty {

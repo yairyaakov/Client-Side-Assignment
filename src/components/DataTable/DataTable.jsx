@@ -1,12 +1,7 @@
 import './DataTable.css'
+import EditableCell from './EditableCell'
 
-function formatCellValue(value, type) {
-  if (value === undefined || value === null || value === '') return '-'
-  if (type === 'boolean') return value ? 'Yes' : 'No'
-  return value
-}
-
-function DataTable({ columns, data, visibleColumnIds }) {
+function DataTable({ columns, data, visibleColumnIds, onCellChange }) {
   const sortedColumns = [...columns].sort((a, b) => a.ordinalNo - b.ordinalNo)
   const visibleColumns = sortedColumns.filter(col => visibleColumnIds.includes(col.id))
 
@@ -41,7 +36,12 @@ function DataTable({ columns, data, visibleColumnIds }) {
                   key={column.id}
                   style={column.width ? { width: column.width } : undefined}
                 >
-                  {formatCellValue(row[column.id], column.type)}
+                  <EditableCell
+                    value={row[column.id]}
+                    column={column}
+                    rowId={row.id}
+                    onCellChange={onCellChange}
+                  />
                 </td>
               ))}
             </tr>
