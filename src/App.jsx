@@ -1,8 +1,22 @@
+import { useState } from 'react'
 import './App.css'
 import DataTable from './components/DataTable/DataTable'
+import ColumnVisibilityPanel from './components/ColumnVisibilityPanel/ColumnVisibilityPanel'
 import { tableMockData } from './utils/mockData'
 
 function App() {
+  const [visibleColumnIds, setVisibleColumnIds] = useState(
+    () => tableMockData.columns.map(column => column.id)
+  )
+
+  function handleToggleColumn(columnId) {
+    setVisibleColumnIds(prev =>
+      prev.includes(columnId)
+        ? prev.filter(id => id !== columnId)
+        : [...prev, columnId]
+    )
+  }
+
   return (
     <div className="app">
       <header className="app-header">
@@ -11,9 +25,15 @@ function App() {
       </header>
 
       <main className="app-main">
+        <ColumnVisibilityPanel
+          columns={tableMockData.columns}
+          visibleColumnIds={visibleColumnIds}
+          onToggleColumn={handleToggleColumn}
+        />
         <DataTable
           columns={tableMockData.columns}
           data={tableMockData.data}
+          visibleColumnIds={visibleColumnIds}
         />
       </main>
     </div>
