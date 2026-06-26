@@ -1,11 +1,13 @@
+/* Scrollable wrapper — handles tables wider than the screen */
 .table-container {
   width: 100%;
   overflow-x: auto;
-  border-radius: 8px;
   border: 1px solid #dee2e6;
+  border-radius: 8px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
+/* The table itself */
 .data-table {
   width: 100%;
   border-collapse: collapse;
@@ -13,8 +15,7 @@
   background-color: #ffffff;
 }
 
-/* ── Header ── */
-
+/* Column headers */
 .data-table thead {
   background-color: #f1f3f5;
 }
@@ -22,8 +23,8 @@
 .data-table th {
   padding: 0.75rem 1rem;
   text-align: left;
-  font-weight: 600;
   font-size: 0.8rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: #495057;
@@ -31,8 +32,7 @@
   white-space: nowrap;
 }
 
-/* ── Body ── */
-
+/* Data rows */
 .data-table td {
   padding: 0.65rem 1rem;
   border-bottom: 1px solid #e9ecef;
@@ -40,16 +40,17 @@
   white-space: nowrap;
 }
 
+/* Remove the border on the very last row */
 .data-table tbody tr:last-child td {
   border-bottom: none;
 }
 
+/* Highlight a row when the mouse is over it */
 .data-table tbody tr:hover {
   background-color: #f8f9fa;
 }
 
-/* ── Editable inputs ── */
-
+/* Text and number inputs inside cells */
 .data-table td input[type='text'],
 .data-table td input[type='number'],
 .data-table td select {
@@ -63,26 +64,28 @@
   color: #212529;
   background-color: transparent;
   outline: none;
-  transition: border-color 0.15s, background-color 0.15s;
 }
 
+/* Show a light border when hovering an editable cell */
 .data-table td input[type='text']:hover,
 .data-table td input[type='number']:hover,
 .data-table td select:hover {
   border-color: #ced4da;
 }
 
+/* Show a dark border and white background when the cell is focused */
 .data-table td input[type='text']:focus,
 .data-table td input[type='number']:focus,
 .data-table td select:focus {
   border-color: #1a1a2e;
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 .data-table td select {
   cursor: pointer;
 }
 
+/* Checkbox inside a cell */
 .data-table td input[type='checkbox'] {
   display: block;
   width: 16px;
@@ -91,8 +94,7 @@
   accent-color: #1a1a2e;
 }
 
-/* ── Empty state ── */
-
+/* Message shown when the user hides all columns */
 .table-empty {
   margin: 0;
   padding: 2rem 1rem;

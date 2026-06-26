@@ -1,15 +1,15 @@
-/* ── Page layout ── */
-
+/* Page background and padding */
 .app {
   min-height: 100vh;
   background-color: #f8f9fa;
   padding: 2rem 2.5rem;
 }
 
-/* ── Header ── */
-
+/* Header: title and subtitle */
 .app-header {
-  margin-bottom: 1.75rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #dee2e6;
 }
 
 .app-header h1 {
@@ -17,7 +17,6 @@
   font-weight: 700;
   color: #1a1a2e;
   margin: 0 0 0.25rem 0;
-  letter-spacing: -0.3px;
 }
 
 .app-subtitle {
@@ -26,24 +25,20 @@
   color: #6c757d;
 }
 
-/* ── Main content ── */
-
+/* Content area — limits how wide the table grows */
 .app-main {
-  max-width: 900px;
+  max-width: 1000px;
 }
 
-/* ── Actions area ── */
-
+/* Row containing the Save and Cancel buttons */
 .app-actions {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 1rem;
-  flex-wrap: wrap;
 }
 
-/* Primary button — Save Changes */
-
+/* Save Changes button — dark filled style */
 .save-btn {
   padding: 0.45rem 1.1rem;
   font-size: 0.9rem;
@@ -51,11 +46,9 @@
   font-weight: 600;
   color: #ffffff;
   background-color: #1a1a2e;
-  border: 1.5px solid #1a1a2e;
+  border: 1px solid #1a1a2e;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.15s;
-  white-space: nowrap;
 }
 
 .save-btn:hover:not(:disabled) {
@@ -68,20 +61,17 @@
   cursor: not-allowed;
 }
 
-/* Secondary button — Cancel Changes */
-
+/* Cancel Changes button — outline style */
 .cancel-btn {
   padding: 0.45rem 1.1rem;
   font-size: 0.9rem;
   font-family: inherit;
   font-weight: 600;
   color: #1a1a2e;
-  background-color: transparent;
-  border: 1.5px solid #1a1a2e;
+  background-color: #ffffff;
+  border: 1px solid #1a1a2e;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.15s;
-  white-space: nowrap;
 }
 
 .cancel-btn:hover:not(:disabled) {
@@ -93,18 +83,16 @@
   cursor: not-allowed;
 }
 
-/* Status message */
-
+/* Status message shown after saving or canceling */
 .save-message {
   font-size: 0.875rem;
   font-weight: 500;
   color: #495057;
 }
 
-/* Helper note */
-
+/* Helper note — margin-left: auto pushes it to the far right of the flex row */
 .save-note {
   margin-left: auto;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   color: #6c757d;
 }
