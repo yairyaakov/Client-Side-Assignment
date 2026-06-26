@@ -5,20 +5,38 @@ import ColumnVisibilityPanel from './components/ColumnVisibilityPanel/ColumnVisi
 import { tableMockData } from './utils/mockData'
 
 function App() {
-  const [tableRows, setTableRows] = useState(tableMockData.data)
+  const [savedRows, setSavedRows] = useState(tableMockData.data)
+  const [draftRows, setDraftRows] = useState(tableMockData.data)
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
+  const [saveMessage, setSaveMessage] = useState('')
 
   const [visibleColumnIds, setVisibleColumnIds] = useState(
     () => tableMockData.columns.map(column => column.id)
   )
 
   function handleCellChange(rowId, columnId, newValue) {
-    setTableRows(prevRows =>
+    setDraftRows(prevRows =>
       prevRows.map(row =>
         row.id === rowId
           ? { ...row, [columnId]: newValue }
           : row
       )
     )
+    setHasUnsavedChanges(true)
+    setSaveMessage('')
+  }
+
+  function handleSaveChanges() {
+    setSavedRows(draftRows)
+    setHasUnsavedChanges(false)
+    setSaveMessage('Changes saved locally for this session.')
+    console.log('Saved rows:', draftRows)
+  }
+
+  function handleCancelChanges() {
+    setDraftRows(savedRows)
+    setHasUnsavedChanges(false)
+    setSaveMessage('Unsaved changes were discarded.')
   }
 
   function handleToggleColumn(columnId) {
@@ -42,9 +60,36 @@ function App() {
           visibleColumnIds={visibleColumnIds}
           onToggleColumn={handleToggleColumn}
         />
+
+        <div className="app-actions">
+          <button
+            className="save-btn"
+            onClick={handleSaveChanges}
+            disabled={!hasUnsavedChanges}
+          >
+            Save Changes
+          </button>
+
+          <button
+            className="cancel-btn"
+            onClick={handleCancelChanges}
+            disabled={!hasUnsavedChanges}
+          >
+            Cancel Changes
+          </button>
+
+          {saveMessage && (
+            <span className="save-message">{saveMessage}</span>
+          )}
+
+          <span className="save-note">
+            Changes are kept in memory only and will reset after page refresh.
+          </span>
+        </div>
+
         <DataTable
           columns={tableMockData.columns}
-          data={tableRows}
+          data={draftRows}
           visibleColumnIds={visibleColumnIds}
           onCellChange={handleCellChange}
         />

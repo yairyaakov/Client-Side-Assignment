@@ -31,3 +31,80 @@
 .app-main {
   max-width: 900px;
 }
+
+/* ── Actions area ── */
+
+.app-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Primary button — Save Changes */
+
+.save-btn {
+  padding: 0.45rem 1.1rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #1a1a2e;
+  border: 1.5px solid #1a1a2e;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  white-space: nowrap;
+}
+
+.save-btn:hover:not(:disabled) {
+  background-color: #2d2d50;
+  border-color: #2d2d50;
+}
+
+.save-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Secondary button — Cancel Changes */
+
+.cancel-btn {
+  padding: 0.45rem 1.1rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: #1a1a2e;
+  background-color: transparent;
+  border: 1.5px solid #1a1a2e;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+  white-space: nowrap;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background-color: #e9ecef;
+}
+
+.cancel-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Status message */
+
+.save-message {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #495057;
+}
+
+/* Helper note */
+
+.save-note {
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: #6c757d;
+}
