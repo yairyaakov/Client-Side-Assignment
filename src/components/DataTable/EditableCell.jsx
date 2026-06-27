@@ -1,4 +1,7 @@
-function EditableCell({ value, column, rowId, onCellChange }) {
+import React from 'react'
+
+// React.memo means this cell only re-renders when its own props change.
+const EditableCell = React.memo(function EditableCell({ value, column, rowId, onCellChange }) {
   const { id: columnId, type, options } = column
 
   if (type === 'boolean') {
@@ -18,7 +21,7 @@ function EditableCell({ value, column, rowId, onCellChange }) {
         value={value ?? ''}
         onChange={e => {
           const raw = e.target.value
-          onCellChange(rowId, columnId, raw === '' ? '' : Number(raw))
+           onCellChange(rowId,columnId, raw === '' ? '' : Number(raw))
         }}
       />
     )
@@ -51,6 +54,6 @@ function EditableCell({ value, column, rowId, onCellChange }) {
 
   // Fallback for unknown column types
   return <span>{value ?? '-'}</span>
-}
+})
 
 export default EditableCell

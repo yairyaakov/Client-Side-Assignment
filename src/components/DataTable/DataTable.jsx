@@ -1,9 +1,17 @@
+import { useMemo } from 'react'
 import './DataTable.css'
-import EditableCell from './EditableCell'
+import TableRow from './TableRow'
 
 function DataTable({ columns, data, visibleColumnIds, onCellChange }) {
-  const sortedColumns = [...columns].sort((a, b) => a.ordinalNo - b.ordinalNo)
-  const visibleColumns = sortedColumns.filter(col => visibleColumnIds.includes(col.id))
+  const sortedColumns = useMemo(
+    () => [...columns].sort((a, b) => a.ordinalNo - b.ordinalNo),
+    [columns]
+  )
+
+  const visibleColumns = useMemo(
+    () => sortedColumns.filter(col => visibleColumnIds.includes(col.id)),
+    [sortedColumns, visibleColumnIds]
+  )
 
   if (visibleColumns.length === 0) {
     return (
@@ -30,21 +38,12 @@ function DataTable({ columns, data, visibleColumnIds, onCellChange }) {
         </thead>
         <tbody>
           {data.map(row => (
-            <tr key={row.id}>
-              {visibleColumns.map(column => (
-                <td
-                  key={column.id}
-                  style={column.width ? { width: column.width } : undefined}
-                >
-                  <EditableCell
-                    value={row[column.id]}
-                    column={column}
-                    rowId={row.id}
-                    onCellChange={onCellChange}
-                  />
-                </td>
-              ))}
-            </tr>
+            <TableRow
+              key={row.id}
+              row={row}
+              visibleColumns={visibleColumns}
+              onCellChange={onCellChange}
+            />
           ))}
         </tbody>
       </table>

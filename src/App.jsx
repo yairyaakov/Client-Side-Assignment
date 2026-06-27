@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import './App.css'
 import DataTable from './components/DataTable/DataTable'
 import ColumnVisibilityPanel from './components/ColumnVisibilityPanel/ColumnVisibilityPanel'
@@ -9,12 +9,11 @@ function App() {
   const [draftRows, setDraftRows] = useState(tableMockData.data)
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
   const [saveMessage, setSaveMessage] = useState('')
-
   const [visibleColumnIds, setVisibleColumnIds] = useState(
     () => tableMockData.columns.map(column => column.id)
   )
 
-  function handleCellChange(rowId, columnId, newValue) {
+  const handleCellChange = useCallback((rowId, columnId, newValue) => {
     setDraftRows(prevRows =>
       prevRows.map(row =>
         row.id === rowId
@@ -24,28 +23,28 @@ function App() {
     )
     setHasUnsavedChanges(true)
     setSaveMessage('')
-  }
+  }, [])
 
-  function handleSaveChanges() {
+  const handleSaveChanges = useCallback(() => {
     setSavedRows(draftRows)
     setHasUnsavedChanges(false)
     setSaveMessage('Changes saved locally for this session.')
     console.log('Saved rows:', draftRows)
-  }
+  }, [draftRows])
 
-  function handleCancelChanges() {
+  const handleCancelChanges = useCallback(() => {
     setDraftRows(savedRows)
     setHasUnsavedChanges(false)
     setSaveMessage('Unsaved changes were discarded.')
-  }
+  }, [savedRows])
 
-  function handleToggleColumn(columnId) {
+  const handleToggleColumn = useCallback((columnId) => {
     setVisibleColumnIds(prev =>
       prev.includes(columnId)
         ? prev.filter(id => id !== columnId)
         : [...prev, columnId]
     )
-  }
+  }, [])
 
   return (
     <div className="app">
