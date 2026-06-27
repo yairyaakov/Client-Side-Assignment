@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import './App.css'
 import DataTable from './components/DataTable/DataTable'
 import ColumnVisibilityPanel from './components/ColumnVisibilityPanel/ColumnVisibilityPanel'
-import { tableMockData } from './utils/mockData'
+import { tableMockData, MOCK_ROW_COUNT } from './utils/mockData'
 
 function App() {
   const [savedRows, setSavedRows] = useState(tableMockData.data)
@@ -83,6 +83,10 @@ function App() {
 
           <span className="save-note">
             Changes are kept in memory only and will reset after page refresh.
+          </span>
+
+          <span className="row-count">
+            Showing {MOCK_ROW_COUNT.toLocaleString()} rows
           </span>
         </div>
 

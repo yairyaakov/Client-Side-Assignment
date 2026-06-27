@@ -90,9 +90,15 @@
   color: #495057;
 }
 
-/* Helper note — margin-left: auto pushes it to the far right of the flex row */
+/* Helper note — sits just before the row count on the right */
 .save-note {
   margin-left: auto;
+  font-size: 0.8rem;
+  color: #6c757d;
+}
+
+/* Row count label — sits at the far right of the actions row */
+.row-count {
   font-size: 0.8rem;
   color: #6c757d;
 }
