@@ -97,16 +97,6 @@ This keeps the table generic — dropdown values come from the column definition
 - The mock dataset uses 1,000 rows to test rendering at scale.
 - No virtualization library was added to keep the project simple.
 
-## What Was Not Added
-
-- No backend
-- No API calls
-- No database
-- No localStorage
-- No ready-made table library
-
-This matches the assignment requirement: saving is local and does not need to be persisted.
-
 ## Project Structure
 
 ```
